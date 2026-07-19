@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Atlas</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f5f7fb;
+}
+
+header{
+  background:#2563eb;
+  color:white;
+  text-align:center;
+  padding:20px;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.page{
+  display:none;
+  padding:20px;
+}
+
+.page.active{
+  display:block;
+}
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+}
+
+.bottom button{
+  flex:1;
+  border:none;
+  background:white;
+  padding:15px;
+  font-size:16px;
+}
+
+.bottom button:hover{
+  background:#eef2ff;
+}
+</style>
+</head>
+<body>
+
+<header>🌍 Travel Atlas</header>
+
+<div id="map" class="page active">
+<h2>Žemėlapis</h2>
+<p>Pirmas testas – ar veikia mygtukai.</p>
+</div>
+
+<div id="add" class="page">
+<h2>Pridėti</h2>
+<p>Šis langas turi atsidaryti.</p>
+</div>
+
+<div id="history" class="page">
+<h2>Istorija</h2>
+<p>Čia vėliau bus kelionės.</p>
+</div>
+
+<div id="stats" class="page">
+<h2>Statistika</h2>
+<p>Čia vėliau bus statistika.</p>
+</div>
+
+<div class="bottom">
+<button onclick="showPage('map')">🌍</button>
+<button onclick="showPage('add')">➕</button>
+<button onclick="showPage('history')">🗓️</button>
+<button onclick="showPage('stats')">📊</button>
+</div>
+
+<script>
+function showPage(id){
+ document.querySelectorAll('.page').forEach(p=>{
+   p.classList.remove('active');
+ });
+
+ document.getElementById(id).classList.add('active');
+}
+</script>
+
+</body>
+</html>
