@@ -92,16 +92,153 @@ header{
 <button onclick="showPage('history')">🗓️</button>
 <button onclick="showPage('stats')">📊</button>
 </div>
+<script>
+let trips = JSON.parse(localStorage.getItem('travelAtlasTrips')) || [];
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.remove('active');
+  });
+
+  document.getElementById(id).classList.add('active');
+
+  if(id === 'history'){
+    renderTrips();
+  }
+}
+
+function saveTrip(){
+  const country = document.getElementById('country').value;
+  const city = document.getElementById('city').value;
+  const date = document.getElementById('date').value;
+
+  if(country === '' || city === '' || date === ''){
+    alert('Įrašykite šalį, miestą ir datą');
+    return;
+  }
+
+  trips.push({
+    country: country,
+    city: city,
+    date: date
+  });
+
+  localStorage.setItem(
+    'travelAtlasTrips',
+    JSON.stringify(trips)
+  );
+
+  alert('Kelionė išsaugota');
+
+  showPage('history');
+}
+
+function renderTrips(){
+  const list = document.getElementById('tripList');
+
+  if(!list) return;
+
+  if(trips.length === 0){
+    list.innerHTML = '<p>Kelionių dar nėra.</p>';
+    return;
+  }
+
+  list.innerHTML = '';
+
+  trips.forEach(trip=>{
+    list.innerHTML += 
+      <div style="
+        background:white;
+        padding:10px;
+        margin-bottom:10px;
+        border:1px solid #ddd;
+        border-radius:10px;
+      ">
+        <b>${trip.country}</b><br>
+        📍 ${trip.city}<br>
+        📅 ${trip.date}
+      </div>
+    ;
+  });
+}
+
+renderTrips();
+</script>
 
 <script>
-function showPage(id){
- document.querySelectorAll('.page').forEach(p=>{
-   p.classList.remove('active');
- });
+let trips = JSON.parse(localStorage.getItem('travelAtlasTrips')) || [];
 
- document.getElementById(id).classList.add('active');
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.remove('active');
+  });
+
+  document.getElementById(id).classList.add('active');
+
+  if(id === 'history'){
+    renderTrips();
+  }
 }
+
+function saveTrip(){
+  const country = document.getElementById('country').value;
+  const city = document.getElementById('city').value;
+  const date = document.getElementById('date').value;
+
+  if(country === '' || city === '' || date === ''){
+    alert('Įrašykite šalį, miestą ir datą');
+    return;
+  }
+
+  trips.push({
+    country: country,
+    city: city,
+    date: date
+  });
+
+  localStorage.setItem(
+    'travelAtlasTrips',
+    JSON.stringify(trips)
+  );
+
+  alert('Kelionė išsaugota');
+
+  showPage('history');
+}
+
+function renderTrips(){
+  const list = document.getElementById('tripList');
+
+  if(!list) return;
+
+  if(trips.length === 0){
+    list.innerHTML = '<p>Kelionių dar nėra.</p>';
+    return;
+  }
+
+  list.innerHTML = '';
+
+  trips.forEach(trip=>{
+    list.innerHTML += 
+      <div style="
+        background:white;
+        padding:10px;
+        margin-bottom:10px;
+        border:1px solid #ddd;
+        border-radius:10px;
+      ">
+        <b>${trip.country}</b><br>
+        📍 ${trip.city}<br>
+        📅 ${trip.date}
+      </div>
+    ;
+  });
+}
+
+renderTrips();
 </script>
+
+
 
 </body>
 </html>
