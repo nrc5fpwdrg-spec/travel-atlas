@@ -3,30 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Travel Atlas Pro 4.1</title>
+<title>Travel Atlas Pro 5.0</title>
 <meta name="theme-color" content="#f97316">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-:root{--brand:#f97316;--pink:#ec4899;--blue:#2563eb;--bg:#fff7ed;--text:#172033;--muted:#64748b;--line:#e5e7eb;--personal:#ff8a00;--work:#0ea5e9;--family:#e11d48;--other:#10b981;--assistant:#7c3aed}*{box-sizing:border-box}body{margin:0;font-family:Arial,system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(180deg,#fff7ed,#eff6ff);color:var(--text)}.hero{background:radial-gradient(circle at 10% 0%,#fde047 0,#f97316 28%,#ec4899 58%,#2563eb 100%);color:white;text-align:center;padding:28px 16px 18px;box-shadow:0 12px 28px rgba(15,23,42,.2)}.hero h1{margin:0;font-size:38px;letter-spacing:-.04em}.hero p{margin:8px auto 0;max-width:840px;font-size:16px;line-height:1.35}.langbar{background:#0f172a;color:white;padding:9px 12px;display:flex;justify-content:center;gap:10px;align-items:center}.langbar select{max-width:280px;border:0;border-radius:999px;padding:9px 14px;font-weight:800}.page{display:none;padding:22px 22px 120px}.page.active{display:block}h2{font-size:32px;margin:10px 0 18px}.card,.poi{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:24px;padding:18px;margin:15px 0;box-shadow:0 10px 30px rgba(15,23,42,.1)}.notice{background:#ecfdf5;border:1px solid #86efac;color:#14532d;border-radius:16px;padding:13px;margin:12px 0;font-weight:800}.warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:16px;padding:13px;margin:12px 0}.small{font-size:14px;color:var(--muted);line-height:1.45}label{display:block;margin:12px 0 6px;font-weight:900}input,select,textarea{width:100%;padding:14px;border:1px solid #d1d5db;border-radius:16px;font-size:18px;background:white}textarea{min-height:92px}button{border:0;border-radius:16px;padding:13px 16px;font-size:17px;font-weight:900;background:#e0e7ff;color:#1d4ed8;cursor:pointer}.primary{background:linear-gradient(90deg,#f97316,#ec4899);color:white}.secondary{background:#e5e7eb;color:#111827}.danger{background:#fee2e2;color:#991b1b}.ok{background:#dcfce7;color:#166534}.full{width:100%;margin-top:12px}.row{display:flex;gap:10px}.row>*{flex:1}#realMap{height:470px;border-radius:24px;overflow:hidden;border:2px solid #fed7aa;background:#dbeafe}.legend{display:flex;flex-wrap:wrap;gap:11px;margin-top:12px}.dot{display:inline-block;width:13px;height:13px;border-radius:50%;margin-right:5px;vertical-align:-1px}.d-personal{background:var(--personal)}.d-work{background:var(--work)}.d-family{background:var(--family)}.d-other{background:var(--other)}.d-assistant{background:var(--assistant)}.bottom{position:fixed;left:0;right:0;bottom:0;z-index:1000;display:flex;background:rgba(255,255,255,.98);border-top:1px solid #ddd;box-shadow:0 -8px 24px rgba(15,23,42,.15);padding-bottom:env(safe-area-inset-bottom)}.bottom button{flex:1;background:white;color:#334155;border-radius:0;padding:10px 2px 9px;font-size:22px}.bottom span{display:block;font-size:10.5px;margin-top:3px}.bottom button.active{background:#fff7ed;color:#ea580c}.title{font-size:21px;font-weight:900}.badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.badge{padding:5px 9px;border-radius:999px;background:#f1f5f9;color:#334155;font-size:12px;font-weight:900}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{text-align:center;background:white;border:1px solid var(--line);border-radius:20px;padding:16px 6px;box-shadow:0 8px 22px rgba(15,23,42,.08)}.stat b{display:block;font-size:32px;color:#ea580c}.photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.photos img{width:92px;height:92px;object-fit:cover;border-radius:16px;border:1px solid var(--line);cursor:pointer}.viewer{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px}.viewer img{max-width:95vw;max-height:88vh;border-radius:20px}.viewer button{position:fixed;top:18px;right:18px;background:white;color:#111827}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.chip{background:#f1f5f9;border-radius:999px;padding:7px 11px;font-size:13px;font-weight:800;color:#334155}.poi h3{margin:0 0 10px}.poiItem{border-top:1px solid var(--line);padding:12px 0}.poiItem:first-of-type{border-top:0}.poiName{font-weight:900}.mini{font-size:13px;color:#64748b}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.actions button{font-size:14px;padding:9px 11px}.catTabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.catTabs button{font-size:14px;padding:9px 11px;background:#f1f5f9;color:#334155}.catTabs button.active{background:#f97316;color:white}.routeInfo{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:14px;padding:10px;margin-top:10px;font-weight:800}.debug{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:10px;color:#475569;font-size:12px;white-space:pre-wrap;display:none}@media(min-width:900px){.page{max-width:1080px;margin:auto}.bottom{max-width:1080px;left:50%;transform:translateX(-50%);border-radius:22px 22px 0 0}#realMap{height:610px}}@media(max-width:560px){.row{display:block}.row>*{margin-top:8px}.page{padding-left:14px;padding-right:14px}.bottom button{font-size:20px}.bottom span{font-size:9.5px}.actions button{width:100%}}
+:root{--orange:#f97316;--pink:#ec4899;--blue:#2563eb;--text:#172033;--muted:#64748b;--line:#e5e7eb;--personal:#ff8a00;--work:#0ea5e9;--family:#e11d48;--other:#10b981;--assistant:#7c3aed;--ok:#16a34a}*{box-sizing:border-box}body{margin:0;font-family:Arial,system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(180deg,#fff7ed,#eff6ff);color:var(--text)}.hero{background:radial-gradient(circle at 10% 0%,#fde047 0,#f97316 28%,#ec4899 58%,#2563eb 100%);color:white;text-align:center;padding:28px 16px 18px;box-shadow:0 12px 28px rgba(15,23,42,.2)}.hero h1{margin:0;font-size:38px;letter-spacing:-.04em}.hero p{margin:8px auto 0;max-width:860px;font-size:16px;line-height:1.35}.langbar{background:#0f172a;color:white;padding:9px 12px;display:flex;justify-content:center;gap:10px;align-items:center}.langbar select{max-width:280px;border:0;border-radius:999px;padding:9px 14px;font-weight:800}.page{display:none;padding:22px 22px 120px}.page.active{display:block}h2{font-size:32px;margin:10px 0 18px}.card,.poi{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:24px;padding:18px;margin:15px 0;box-shadow:0 10px 30px rgba(15,23,42,.1)}.notice{background:#ecfdf5;border:1px solid #86efac;color:#14532d;border-radius:16px;padding:13px;margin:12px 0;font-weight:800}.warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:16px;padding:13px;margin:12px 0}.small{font-size:14px;color:var(--muted);line-height:1.45}label{display:block;margin:12px 0 6px;font-weight:900}input,select,textarea{width:100%;padding:14px;border:1px solid #d1d5db;border-radius:16px;font-size:18px;background:white}textarea{min-height:92px}button{border:0;border-radius:16px;padding:13px 16px;font-size:17px;font-weight:900;background:#e0e7ff;color:#1d4ed8;cursor:pointer}.primary{background:linear-gradient(90deg,#f97316,#ec4899);color:white}.secondary{background:#e5e7eb;color:#111827}.danger{background:#fee2e2;color:#991b1b}.ok{background:#dcfce7;color:#166534}.full{width:100%;margin-top:12px}.row{display:flex;gap:10px}.row>*{flex:1}#realMap{height:500px;border-radius:24px;overflow:hidden;border:2px solid #fed7aa;background:#dbeafe}.legend{display:flex;flex-wrap:wrap;gap:11px;margin-top:12px}.dot{display:inline-block;width:13px;height:13px;border-radius:50%;margin-right:5px;vertical-align:-1px}.d-personal{background:var(--personal)}.d-work{background:var(--work)}.d-family{background:var(--family)}.d-other{background:var(--other)}.d-assistant{background:var(--assistant)}.bottom{position:fixed;left:0;right:0;bottom:0;z-index:1000;display:flex;background:rgba(255,255,255,.98);border-top:1px solid #ddd;box-shadow:0 -8px 24px rgba(15,23,42,.15);padding-bottom:env(safe-area-inset-bottom)}.bottom button{flex:1;background:white;color:#334155;border-radius:0;padding:10px 2px 9px;font-size:22px}.bottom span{display:block;font-size:10.5px;margin-top:3px}.bottom button.active{background:#fff7ed;color:#ea580c}.title{font-size:21px;font-weight:900}.badges,.chips,.actions,.catTabs{display:flex;gap:8px;flex-wrap:wrap}.badges{margin-top:8px}.badge,.chip{padding:6px 10px;border-radius:999px;background:#f1f5f9;color:#334155;font-size:12px;font-weight:900}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{text-align:center;background:white;border:1px solid var(--line);border-radius:20px;padding:16px 6px;box-shadow:0 8px 22px rgba(15,23,42,.08)}.stat b{display:block;font-size:32px;color:#ea580c}.photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.photos img{width:92px;height:92px;object-fit:cover;border-radius:16px;border:1px solid var(--line);cursor:pointer}.viewer{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px}.viewer img{max-width:95vw;max-height:88vh;border-radius:20px}.viewer button{position:fixed;top:18px;right:18px;background:white;color:#111827}.poi h3{margin:0 0 10px}.poiItem{border-top:1px solid var(--line);padding:12px 0}.poiItem:first-of-type{border-top:0}.poiName{font-weight:900}.mini{font-size:13px;color:#64748b}.actions{margin-top:9px}.actions button,.catTabs button{font-size:14px;padding:9px 11px}.catTabs{margin:12px 0}.catTabs button{background:#f1f5f9;color:#334155}.catTabs button.active{background:#f97316;color:white}.routeInfo{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:14px;padding:10px;margin-top:10px;font-weight:800}@media(min-width:900px){.page{max-width:1080px;margin:auto}.bottom{max-width:1080px;left:50%;transform:translateX(-50%);border-radius:22px 22px 0 0}#realMap{height:620px}}@media(max-width:560px){.row{display:block}.row>*{margin-top:8px}.page{padding-left:14px;padding-right:14px}.bottom button{font-size:20px}.bottom span{font-size:9.5px}.actions button{width:100%}}
 </style>
 </head>
 <body>
-<header class="hero"><h1>🌍 Travel Atlas Pro</h1><p>Kelionių atlasas pirmiausia rodo tavo aplankytas šalis ir miestus. Asistentas atskirai padeda rasti kas yra šalia tavęs realiu laiku.</p></header>
+<header class="hero"><h1>🌍 Travel Atlas Pro</h1><p>5.0 versija: pagrindinis žemėlapis yra tavo kelionių atlasas, o asistentas yra atskiras pagalbininkas šalia esančioms vietoms.</p></header>
 <div class="langbar"><span>Kalba</span><select id="langSelect"><option value="lt">Lietuvių</option><option value="en">English</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pl">Polski</option><option value="lv">Latviešu</option></select></div>
 <main>
-<section id="map" class="page active"><h2>Žemėlapis</h2><div class="notice">Travel Atlas Pro 4.1 – kelionių žemėlapis + pataisytas asistentas šalia manęs.</div><div class="card"><div id="realMap"></div><div class="legend"><span><i class="dot d-personal"></i>Asmeninė</span><span><i class="dot d-work"></i>Darbo</span><span><i class="dot d-family"></i>Šeimos</span><span><i class="dot d-other"></i>Kita</span><span><i class="dot d-assistant"></i>Asistentas</span></div><button class="secondary full" id="fitTripsBtn">🌍 Rodyti mano kelionių žemėlapį</button><p class="small">Pagrindinis žemėlapis skirtas kelionių istorijai. Asistentas žemėlapį priartina tik tada, kai jo prašai.</p></div><div class="card"><div class="title">Greita suvestinė</div><p id="mapSummary" class="small"></p><div id="visitedChips" class="chips"></div></div></section>
+<section id="map" class="page active"><h2>Žemėlapis</h2><div class="notice">Travel Atlas Pro 5.0 – mano kelionių atlasas. Žemėlapis rodo tavo aplankytus miestus, o šalys rodomos sąraše.</div><div class="card"><div id="realMap"></div><div class="legend"><span><i class="dot d-personal"></i>Asmeninė</span><span><i class="dot d-work"></i>Darbo</span><span><i class="dot d-family"></i>Šeimos</span><span><i class="dot d-other"></i>Kita</span><span><i class="dot d-assistant"></i>Asistentas</span></div><button class="secondary full" id="fitTripsBtn">🌍 Rodyti mano kelionių žemėlapį</button><p class="small">Jeigu žemėlapis tuščias, importuok atsarginę kopiją skiltyje „Duomenys“ arba pridėk kelionę.</p></div><div class="card"><div class="title">Greita suvestinė</div><p id="mapSummary" class="small"></p><div id="visitedChips" class="chips"></div></div></section>
 <section id="add" class="page"><h2>Pridėti kelionę</h2><div class="card"><label>Šalis</label><input id="country" list="countries" placeholder="Pvz., Airija arba Ireland"><datalist id="countries"></datalist><label>Miestas / vieta</label><input id="city" list="cities" placeholder="Rašykite miestą"><datalist id="cities"></datalist><button class="secondary full" id="findCoords">🔎 Rasti miesto koordinates</button><div class="row"><div><label>Data</label><input id="date" type="date"></div><div><label>Tipas</label><select id="type"><option value="personal">Asmeninė</option><option value="work">Darbo</option><option value="family">Šeimos</option><option value="other">Kita</option></select></div></div><label>Pastabos</label><textarea id="notes" placeholder="Trumpas prisiminimas..."></textarea><label>Nuotraukos</label><input id="photosInput" type="file" accept="image/*" multiple><button class="ok full" id="gpsBtn">📍 Nustatyti mano vietą</button><button class="primary full" id="saveBtn">Išsaugoti</button></div></section>
 <section id="history" class="page"><h2>Istorija</h2><div id="tripList"></div></section>
 <section id="stats" class="page"><h2>Statistika</h2><div class="stats"><div class="stat"><b id="statTrips">0</b><span>Kelionės</span></div><div class="stat"><b id="statCountries">0</b><span>Šalys</span></div><div class="stat"><b id="statCities">0</b><span>Vietos</span></div></div><div class="card"><div class="title">Aplankytos šalys</div><div id="countryStats" class="small"></div></div></section>
-<section id="assistant" class="page"><h2>Asistentas</h2><div class="card"><p class="small">Praktinis pagalbininkas kelionėje: naudoja tavo GPS arba įrašytą miestą ir ieško artimiausių taksi, kavinių, restoranų, viešbučių, lankytinų vietų bei transporto.</p><label>Vieta</label><input id="assistantPlace" placeholder="Palikite tuščią GPS paieškai arba įrašykite miestą"><div class="row"><button class="primary" id="assistantSearch">📍 Kas šalia manęs?</button><button class="secondary" id="assistantLast">Paskutinė kelionė</button></div><div class="catTabs" id="assistantTabs"></div><p class="small">Rezultatai priklauso nuo OpenStreetMap duomenų. Jei konkrečioje vietoje duomenų mažai, įrašyk miestą arba padidinsime paieškos radiusą.</p><div id="assistantDebug" class="debug"></div></div><div id="assistantResults"></div></section>
-<section id="data" class="page"><h2>Duomenys</h2><div class="card"><button class="secondary full" id="exportBtn">Eksportuoti atsarginę kopiją</button><button class="secondary full" id="importBtn">Importuoti atsarginę kopiją</button><input id="importFile" type="file" accept="application/json" style="display:none"><button class="danger full" id="clearBtn">Ištrinti viską</button><p class="small">Jeigu istorija liko Netlify versijoje, ten eksportuok JSON kopiją ir importuok čia.</p></div></section>
+<section id="assistant" class="page"><h2>Asistentas</h2><div class="card"><p class="small">Asistentas naudoja tavo GPS arba įrašytą miestą. Jis ieško šalia esančių taksi, kavinių, restoranų, viešbučių, lankytinų vietų ir transporto.</p><label>Vieta</label><input id="assistantPlace" placeholder="Palik tuščią GPS paieškai arba įrašyk miestą"><div class="row"><button class="primary" id="assistantSearch">📍 Kas šalia manęs?</button><button class="secondary" id="assistantLast">Paskutinė kelionė</button></div><div class="catTabs" id="assistantTabs"></div><p class="small">Rezultatai priklauso nuo OpenStreetMap duomenų. Jei GPS vietoje neranda, pabandyk miestą, pvz. Vilnius, Dublin, Brussels.</p></div><div id="assistantResults"></div></section>
+<section id="data" class="page"><h2>Duomenys</h2><div class="card"><button class="secondary full" id="exportBtn">Eksportuoti atsarginę kopiją</button><button class="secondary full" id="importBtn">Importuoti atsarginę kopiją</button><input id="importFile" type="file" accept="application/json" style="display:none"><button class="danger full" id="clearBtn">Ištrinti viską</button><p class="small">Kelionės saugomos tavo naršyklėje. Importas / eksportas naudoja JSON failą.</p></div></section>
 </main>
 <nav class="bottom"><button id="btn-map" class="active" data-page="map">🌍<span>Žemėlapis</span></button><button id="btn-add" data-page="add">➕<span>Pridėti</span></button><button id="btn-history" data-page="history">🗓️<span>Istorija</span></button><button id="btn-stats" data-page="stats">📊<span>Statistika</span></button><button id="btn-assistant" data-page="assistant">⭐<span>Asistentas</span></button><button id="btn-data" data-page="data">💾<span>Duomenys</span></button></nav>
 <div class="viewer" id="viewer"><button id="closePhoto">Uždaryti</button><img id="bigPhoto" alt=""></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-(function(){
-'use strict';
+(function(){'use strict';
 const KEY='travelAtlasTrips_v1';
 const ISO='AF AX AL DZ AS AD AO AI AQ AG AR AM AW AU AT AZ BS BH BD BB BY BE BZ BJ BM BT BO BQ BA BW BV BR IO BN BG BF BI CV KH CM CA KY CF TD CL CN CX CC CO KM CG CD CK CR CI HR CU CW CY CZ DK DJ DM DO EC EG SV GQ ER EE SZ ET FK FO FJ FI FR GF PF TF GA GM GE DE GH GI GR GL GD GP GU GT GG GN GW GY HT HM VA HN HK HU IS IN ID IR IQ IE IM IL IT JM JP JE JO KZ KE KI KP KR KW KG LA LV LB LS LR LY LI LT LU MO MG MW MY MV ML MT MH MQ MR MU YT MX FM MD MC MN ME MS MA MZ MM NA NR NP NL NC NZ NI NE NG NU NF MK MP NO OM PK PW PS PA PG PY PE PH PN PL PT PR QA RO RU RW RE BL SH KN LC MF PM VC WS SM ST SA SN RS SC SL SG SX SK SI SB SO ZA GS SS ES LK SD SR SJ SE CH SY TW TJ TZ TH TL TG TK TO TT TN TR TM TC TV UG UA AE GB US UM UY UZ VU VE VN VG VI WF EH YE ZM ZW'.split(' ');
 const aliases={'Airija':'IE','Ireland':'IE','Belgija':'BE','Belgium':'BE','Austrija':'AT','Austria':'AT','Latvija':'LV','Latvia':'LV','Lietuva':'LT','Lithuania':'LT','Ispanija':'ES','Spain':'ES','Slovakija':'SK','Slovakia':'SK','Vokietija':'DE','Germany':'DE','Prancūzija':'FR','France':'FR','Italija':'IT','Italy':'IT','Lenkija':'PL','Poland':'PL','Japonija':'JP','Japan':'JP','JAV':'US','USA':'US','Nyderlandai':'NL','Netherlands':'NL','Estija':'EE','Estonia':'EE','Čekija':'CZ','Czechia':'CZ'};
@@ -48,253 +47,28 @@ async function searchCitySuggestions(force){const countryValue=$('country').valu
 function initMap(){if(!window.L){$('realMap').innerHTML='<div class="warn">Žemėlapis neįsikėlė. Patikrinkite internetą.</div>';return}map=L.map('realMap',{worldCopyJump:true}).setView([54.9,23.9],4);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map)}
 function renderTripMarkers(){if(!map)return;tripMarkers.forEach(m=>m.remove());tripMarkers=[];trips.forEach(t=>{const lat=Number(t.lat),lon=Number(t.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return;tripMarkers.push(L.circleMarker([lat,lon],{radius:8,color:'#fff',weight:3,fillColor:typeColor(t.type),fillOpacity:1}).addTo(map).bindPopup(`<b>${escapeHtml(t.city)}</b><br>${escapeHtml(t.country)}<br>${escapeHtml(t.date)}<br>${escapeHtml(typeLabel(t.type))}`))})}
 function fitTrips(){if(!map)return;clearAssistantMarkers();clearRoute();if(myLocationMarker){myLocationMarker.remove();myLocationMarker=null}renderTripMarkers();if(tripMarkers.length){try{map.fitBounds(L.featureGroup(tripMarkers).getBounds().pad(.28))}catch(e){}}else{map.setView([54.9,23.9],4)}}
-function showPage(id,keepMapView=false){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.bottom button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));if(id==='map'&&map){setTimeout(()=>map.invalidateSize(),100);if(!keepMapView)setTimeout(()=>fitTrips(),120);}renderAll(false)}
+function showPage(id,keepMapView=false){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.bottom button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));if(id==='map'&&map){setTimeout(()=>map.invalidateSize(),100);if(!keepMapView)setTimeout(()=>fitTrips(),120)}renderAll()}
 function fixedCoords(code,city){const d=fixedCities[code];if(!d)return null;return d[city]||d[Object.keys(d).find(k=>k.toLowerCase()===String(city).toLowerCase())]||null}
 async function geocodePlace(country,city){const code=countryCode(country);return await geocodeFree(`${city}, ${countryName(code)||country}`)}
 async function geocodeFree(q){try{const res=await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&accept-language=lt&q=${encodeURIComponent(q)}`);const data=await res.json();if(data&&data[0])return[Number(data[0].lat),Number(data[0].lon)]}catch(e){}return null}
-async function findCityCoords(){const country=$('country').value.trim(),city=$('city').value.trim();if(!country||!city){alert('Įrašykite šalį ir miestą.');return null}const code=countryCode(country);const coords=fixedCoords(code,city)||await geocodePlace(country,city);if(coords){lastCoords=coords;alert('Koordinatės rastos. Galite spausti Išsaugoti.');return coords}alert('Koordinačių rasti nepavyko.');return null}
+async function findCityCoords(){const country=$('country').value.trim(),city=$('city').value.trim();if(!country||!city){alert('Įrašykite šalį ir miestą.');return null}const code=countryCode(country);const coords=lastCoords||fixedCoords(code,city)||await geocodePlace(country,city);if(coords){lastCoords=coords;alert('Koordinatės rastos. Galite spausti Išsaugoti.');return coords}alert('Koordinačių rasti nepavyko.');return null}
 async function readPhotos(files){const chosen=[...files].slice(0,3);return Promise.all(chosen.map(f=>new Promise(resolve=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>resolve(null);r.readAsDataURL(f)}))).then(a=>a.filter(Boolean))}
 async function saveTrip(){const country=$('country').value.trim(),city=$('city').value.trim(),date=$('date').value,type=$('type').value,notes=$('notes').value.trim();if(!country||!city||!date){alert('Įrašykite šalį, miestą ir datą.');return}const code=countryCode(country);const coords=lastCoords||fixedCoords(code,city)||await geocodePlace(country,city);if(!coords){alert('Koordinačių rasti nepavyko.');return}const photos=await readPhotos($('photosInput').files);trips.push({id:Date.now(),country:code?countryName(code):country,countryCode:code,city,date,type,notes,lat:coords[0],lon:coords[1],photos});try{saveTrips()}catch(e){trips.pop();alert('Nepavyko išsaugoti. Sumažinkite nuotraukų skaičių.');return}$('country').value='';$('city').value='';$('date').value='';$('notes').value='';$('type').value='personal';$('photosInput').value='';lastCoords=null;setupCities();alert('Kelionė išsaugota!');showPage('history')}
 function renderTrips(){const box=$('tripList');if(!trips.length){box.innerHTML='<p class="small">Kelionių dar nėra.</p>';return}box.innerHTML='';[...trips].sort((a,b)=>String(b.date).localeCompare(String(a.date))).forEach(t=>{const photos=(t.photos||[]).map(src=>`<img src="${src}" alt="" data-photo="${src}">`).join('');box.innerHTML+=`<div class="card"><div class="title">${escapeHtml(t.country)} – ${escapeHtml(t.city)}</div><div class="badges"><span class="badge">📅 ${escapeHtml(t.date)}</span><span class="badge">🏷️ ${escapeHtml(typeLabel(t.type))}</span></div>${t.notes?`<p>📝 ${escapeHtml(t.notes)}</p>`:''}${photos?`<div class="photos">${photos}</div>`:''}<div class="actions"><button class="secondary" data-focus-lat="${t.lat}" data-focus-lon="${t.lon}" data-focus-name="${escapeHtml(t.city)}">Rodyti žemėlapyje</button><button class="danger" data-delete="${t.id}">Ištrinti</button></div></div>`})}
 function renderStats(){$('statTrips').textContent=trips.length;$('statCountries').textContent=new Set(trips.map(t=>t.countryCode||t.country)).size;$('statCities').textContent=new Set(trips.map(t=>`${t.countryCode||t.country}|${t.city}`)).size;const counts={};trips.forEach(t=>counts[t.country]=(counts[t.country]||0)+1);$('countryStats').innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${escapeHtml(k)}: ${v}`).join('<br>')||'—'}
-function renderSummary(){if(!trips.length){$('mapSummary').textContent='Kelionių dar nėra.';$('visitedChips').innerHTML='';return}const last=[...trips].sort((a,b)=>String(b.date).localeCompare(String(a.date)))[0];const countries=[...new Set(trips.map(t=>t.country).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'lt'));$('mapSummary').innerHTML=`Kelionės: <b>${trips.length}</b><br>Aplankytos šalys: <b>${countries.length}</b><br>Paskutinė: ${escapeHtml(last.country)} – ${escapeHtml(last.city)} (${escapeHtml(last.date)})`;$('visitedChips').innerHTML=countries.map(c=>`<span class="chip">${escapeHtml(c)}</span>`).join('')}
+function renderSummary(){if(!trips.length){$('mapSummary').textContent='Kelionių dar nėra. Importuok atsarginę kopiją arba pridėk kelionę, tada žemėlapis rodys tavo aplankytas vietas.';$('visitedChips').innerHTML='';return}const last=[...trips].sort((a,b)=>String(b.date).localeCompare(String(a.date)))[0];const countries=[...new Set(trips.map(t=>t.country).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'lt'));$('mapSummary').innerHTML=`Kelionės: <b>${trips.length}</b><br>Aplankytos šalys: <b>${countries.length}</b><br>Paskutinė: ${escapeHtml(last.country)} – ${escapeHtml(last.city)} (${escapeHtml(last.date)})`;$('visitedChips').innerHTML=countries.map(c=>`<span class="chip">${escapeHtml(c)}</span>`).join('')}
 function getMyPosition(){return new Promise((resolve,reject)=>{if(!navigator.geolocation){reject(new Error('GPS nepalaikomas'));return}navigator.geolocation.getCurrentPosition(pos=>resolve([pos.coords.latitude,pos.coords.longitude]),err=>reject(err),{enableHighAccuracy:true,timeout:15000,maximumAge:0})})}
-async function searchAssistant(){
-
-  let place=$('assistantPlace').value.trim();
-
-  $('assistantResults').innerHTML='<div class="card">Ieškoma artimiausių vietų...</div>';
-
-  clearAssistantMarkers();
-
-  clearRoute();
-
-
-
-  let center=null,label='';
-
-
-
-  if(place){
-
-    center=await geocodeFree(place);
-
-    label=place;
-
-  }else{
-
-    try{
-
-      center=await getMyPosition();
-
-      label='Mano vieta dabar';
-
-    }catch(e){
-
-      $('assistantResults').innerHTML='<div class="card">Nepavyko nustatyti buvimo vietos. Leiskite GPS arba įrašykite miestą.</div>';
-
-      return;
-
-    }
-
-  }
-
-
-
-  if(!center){
-
-    $('assistantResults').innerHTML='<div class="card">Vietos rasti nepavyko.</div>';
-
-    return;
-
-  }
-
-
-
-  assistantCenter=center;
-
-  drawMyLocation(center);
-
-
-
-  const cats=[
-
-    ['taxi','🚕 Taxi / taksi','[amenity=taxi]',7000],
-
-    ['cafes','☕ Kavinės','[amenity~"^(cafe|ice_cream)$"]',5000],
-
-    ['restaurants','🍽️ Restoranai','[amenity~"^(restaurant|fast_food|pub|bar)$"]',6000],
-
-    ['hotels','🏨 Viešbučiai','[tourism~"^(hotel|guest_house|hostel|apartment|motel)$"]',9000],
-
-    ['attractions','🏛️ Lankytinos vietos','[tourism~"^(attraction|museum|gallery|viewpoint|zoo)$"];nwr(around:RADIUS,LAT,LON)[historic]',9000],
-
-    ['transport','🚆 Transportas','[railway=station];nwr(around:RADIUS,LAT,LON)[public_transport];nwr(around:RADIUS,LAT,LON)[highway=bus_stop]',7000]
-
-  ];
-
-
-
-  let html=`<div class="notice">📍 Rodoma pagal vietą: ${escapeHtml(label)}. Artimiausi rezultatai viršuje.</div>`;
-
-
-
-  const results=await Promise.all(cats.map(async ([key,title,selector,radius])=>{
-
-    const items=await overpassCategory(center,key,selector,radius);
-
-    return {key,title,items};
-
-  }));
-
-
-
-  let total=0;
-
-
-
-  for(const r of results){
-
-    total+=r.items.length;
-
-    html+=renderPoi(r.title,r.items,center,r.key);
-
-  }
-
-
-
-  if(total===0){
-
-    html+=`<div class="warn"><b>Rezultatų nepavyko gauti.</b><br>GPS veikia, bet OpenStreetMap / Overpass šiuo metu negrąžino vietų. Įrašyk miestą, pvz. <b>Dublin</b>, <b>Vilnius</b> arba <b>Brussels</b>, ir bandyk dar kartą.</div>`;
-
-  }
-
-
-
-  $('assistantResults').innerHTML=html;
-
-  renderAssistantTabs();
-
-
-
-  if(map)map.setView(center,14);
-
-}
-
-
-
-function overpassQuery(center,key,selector,radius){
-
-  const lat=center[0],lon=center[1];
-
-
-
-  if(selector.includes('LAT')){
-
-    return `[out:json][timeout:18];(nwr(around:${radius},${lat},${lon})${selector.replaceAll('RADIUS',radius).replaceAll('LAT',lat).replaceAll('LON',lon)};);out center 50;`;
-
-  }
-
-
-
-  return `[out:json][timeout:18];(nwr(around:${radius},${lat},${lon})${selector};);out center 50;`;
-
-}
-
-
-
-function fetchWithTimeout(url,options={},ms=10000){
-
-  const controller=new AbortController();
-
-  const id=setTimeout(()=>controller.abort(),ms);
-
-  return fetch(url,{...options,signal:controller.signal}).finally(()=>clearTimeout(id));
-
-}
-
-
-
-async function overpassCategory(center,key,selector,radius){
-
-  const endpoints=[
-
-    'https://overpass-api.de/api/interpreter',
-
-    'https://overpass.kumi.systems/api/interpreter'
-
-  ];
-
-
-
-  const q=overpassQuery(center,key,selector,radius);
-
-
-
-  for(const ep of endpoints){
-
-    try{
-
-      const res=await fetchWithTimeout(ep,{
-
-        method:'POST',
-
-        headers:{'Content-Type':'application/x-www-form-urlencoded'},
-
-        body:'data='+encodeURIComponent(q)
-
-      },10000);
-
-
-
-      if(!res.ok)continue;
-
-
-
-      const data=await res.json();
-
-      const parsed=parseOverpass(data);
-
-
-
-      if(parsed.length)return parsed;
-
-    }catch(e){}
-
-
-
-    try{
-
-      const res=await fetchWithTimeout(ep+'?data='+encodeURIComponent(q),{},10000);
-
-
-
-      if(!res.ok)continue;
-
-
-
-      const data=await res.json();
-
-      const parsed=parseOverpass(data);
-
-
-
-      if(parsed.length)return parsed;
-
-    }catch(e){}
-
-  }
-
-
-
-  return [];
-
-}
-function parseOverpass(data){const seen=new Set();return(data.elements||[]).map(el=>{const tags=el.tags||{};const lat=el.lat||(el.center&&el.center.lat);const lon=el.lon||(el.center&&el.center.lon);const street=[tags['addr:street'],tags['addr:housenumber']].filter(Boolean).join(' ');const city=tags['addr:city']||'';return{name:tags.name||tags.brand||'(be pavadinimo)',lat,lon,address:[street,city].filter(Boolean).join(', '),opening:tags.opening_hours||'',phone:tags.phone||tags['contact:phone']||'',website:tags.website||tags['contact:website']||'',amenity:tags.amenity||tags.tourism||tags.historic||tags.railway||tags.public_transport||tags.highway||''}}).filter(x=>{const ok=x.name&&Number.isFinite(Number(x.lat))&&Number.isFinite(Number(x.lon));const id=x.name+'|'+x.lat+'|'+x.lon;if(!ok||seen.has(id))return false;seen.add(id);return true})}
-function renderPoi(title,items,center,key){if(!items.length)return `<div class="poi"><h3>${title}</h3><p class="small">Rezultatų nerasta.</p></div>`;const sorted=items.map(x=>({...x,dist:Math.round(distance(center[0],center[1],Number(x.lat),Number(x.lon)))})).sort((a,b)=>a.dist-b.dist).slice(0,8);return `<div class="poi"><h3>${title}</h3>${sorted.map(x=>{addAssistantMarker(x,key||title);const details=[x.address?`📍 ${escapeHtml(x.address)}`:'',x.opening?`🕒 ${escapeHtml(x.opening)}`:'',x.phone?`☎️ ${escapeHtml(x.phone)}`:'',x.website?`🌐 ${escapeHtml(x.website)}`:''].filter(Boolean).join('<br>');return `<div class="poiItem"><div class="poiName">${escapeHtml(x.name)}</div><div class="mini"><b>${x.dist<1000?x.dist+' m':(x.dist/1000).toFixed(1)+' km'} nuo jūsų</b>${x.amenity?` · ${escapeHtml(x.amenity)}`:''}</div>${details?`<div class="mini">${details}</div>`:''}<div class="actions"><button class="secondary" data-focus-lat="${x.lat}" data-focus-lon="${x.lon}" data-focus-name="${escapeHtml(x.name)}">Rodyti žemėlapyje</button><button class="ok" data-route-lat="${x.lat}" data-route-lon="${x.lon}" data-route-name="${escapeHtml(x.name)}">Maršrutas</button></div></div>`}).join('')}</div>`}
-function renderAssistantTabs(){const box=$('assistantTabs');if(!box)return;const filters=[['all','Visi'],['taxi','Taxi'],['cafes','Kavinės'],['restaurants','Restoranai'],['hotels','Viešbučiai'],['attractions','Lankytinos'],['transport','Transportas']];box.innerHTML=filters.map(([k,t])=>`<button data-assistant-filter="${k}" class="${k==='all'?'active':''}">${t}</button>`).join('')}
+async function searchAssistant(){let place=$('assistantPlace').value.trim();$('assistantResults').innerHTML='<div class="card">Ieškoma artimiausių vietų...</div>';clearAssistantMarkers();clearRoute();let center=null,label='';if(place){center=await geocodeFree(place);label=place}else{try{center=await getMyPosition();label='Mano vieta dabar'}catch(e){$('assistantResults').innerHTML='<div class="card">Nepavyko nustatyti buvimo vietos. Leiskite GPS arba įrašykite miestą.</div>';return}}if(!center){$('assistantResults').innerHTML='<div class="card">Vietos rasti nepavyko.</div>';return}assistantCenter=center;drawMyLocation(center);const cats=[['all','📍 Viskas šalia','',0]];let html=`<div class="notice">📍 Rodoma pagal vietą: ${escapeHtml(label)}. Artimiausi rezultatai viršuje.</div>`;const items=await overpassAll(center,8000);html+=renderGroupedPois(items,center);if(!items.length){html+=`<div class="warn"><b>Rezultatų nepavyko gauti.</b><br>GPS veikia, bet OpenStreetMap / Overpass šiuo metu negrąžino vietų. Įrašyk miestą, pvz. <b>Dublin</b>, <b>Vilnius</b> arba <b>Brussels</b>, ir bandyk dar kartą.</div>`}$('assistantResults').innerHTML=html;renderAssistantTabs();if(map)map.setView(center,14)}
+function fetchWithTimeout(url,options={},ms=10000){const controller=new AbortController();const id=setTimeout(()=>controller.abort(),ms);return fetch(url,{...options,signal:controller.signal}).finally(()=>clearTimeout(id))}
+function overpassAllQuery(center,radius){const lat=center[0],lon=center[1];return `[out:json][timeout:18];(nwr(around:${radius},${lat},${lon})[amenity~"^(taxi|cafe|ice_cream|restaurant|fast_food|pub|bar)$"];nwr(around:${radius},${lat},${lon})[tourism~"^(hotel|guest_house|hostel|apartment|motel|attraction|museum|gallery|viewpoint|zoo)$"];nwr(around:${radius},${lat},${lon})[historic];nwr(around:${radius},${lat},${lon})[railway=station];nwr(around:${radius},${lat},${lon})[public_transport];nwr(around:${radius},${lat},${lon})[highway=bus_stop];);out center 150;`}
+async function overpassAll(center,radius){const eps=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter'];const q=overpassAllQuery(center,radius);for(const ep of eps){try{const res=await fetchWithTimeout(ep,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'data='+encodeURIComponent(q)},10000);if(!res.ok)continue;const data=await res.json();const parsed=parseOverpass(data);if(parsed.length)return parsed}catch(e){}try{const res=await fetchWithTimeout(ep+'?data='+encodeURIComponent(q),{},10000);if(!res.ok)continue;const data=await res.json();const parsed=parseOverpass(data);if(parsed.length)return parsed}catch(e){}}return[]}
+function categoryOf(x){const a=x.amenity||'';const t=x.tourism||'';const h=x.historic||'';const r=x.railway||'';const p=x.public_transport||'';const hw=x.highway||'';if(a==='taxi')return ['taxi','🚕 Taksi'];if(['cafe','ice_cream'].includes(a))return ['cafes','☕ Kavinės'];if(['restaurant','fast_food','pub','bar'].includes(a))return ['restaurants','🍽️ Restoranai'];if(['hotel','guest_house','hostel','apartment','motel'].includes(t))return ['hotels','🏨 Viešbučiai'];if(t||h)return ['attractions','🏛️ Lankytinos vietos'];if(r||p||hw==='bus_stop')return ['transport','🚆 Transportas'];return ['other','Kita']}
+function parseOverpass(data){const seen=new Set();return(data.elements||[]).map(el=>{const tags=el.tags||{};const lat=el.lat||(el.center&&el.center.lat);const lon=el.lon||(el.center&&el.center.lon);const street=[tags['addr:street'],tags['addr:housenumber']].filter(Boolean).join(' ');const city=tags['addr:city']||'';const obj={name:tags.name||tags.brand||'(be pavadinimo)',lat,lon,address:[street,city].filter(Boolean).join(', '),opening:tags.opening_hours||'',phone:tags.phone||tags['contact:phone']||'',website:tags.website||tags['contact:website']||'',amenity:tags.amenity||'',tourism:tags.tourism||'',historic:tags.historic||'',railway:tags.railway||'',public_transport:tags.public_transport||'',highway:tags.highway||''};const cat=categoryOf(obj);obj.cat=cat[0];obj.catTitle=cat[1];return obj}).filter(x=>{const ok=x.name&&Number.isFinite(Number(x.lat))&&Number.isFinite(Number(x.lon));const id=x.name+'|'+x.lat+'|'+x.lon;if(!ok||seen.has(id))return false;seen.add(id);return true})}
+function renderGroupedPois(items,center){if(!items.length)return'';const order=[['taxi','🚕 Taksi'],['cafes','☕ Kavinės'],['restaurants','🍽️ Restoranai'],['hotels','🏨 Viešbučiai'],['attractions','🏛️ Lankytinos vietos'],['transport','🚆 Transportas']];return order.map(([key,title])=>renderPoi(title,items.filter(x=>x.cat===key),center,key)).join('')}
+function renderPoi(title,items,center,key){if(!items.length)return `<div class="poi"><h3>${title}</h3><p class="small">Rezultatų nerasta.</p></div>`;const sorted=items.map(x=>({...x,dist:Math.round(distance(center[0],center[1],Number(x.lat),Number(x.lon)))})).sort((a,b)=>a.dist-b.dist).slice(0,8);return `<div class="poi"><h3>${title}</h3>${sorted.map(x=>{addAssistantMarker(x,key||title);const details=[x.address?`📍 ${escapeHtml(x.address)}`:'',x.opening?`🕒 ${escapeHtml(x.opening)}`:'',x.phone?`☎️ ${escapeHtml(x.phone)}`:'',x.website?`🌐 ${escapeHtml(x.website)}`:''].filter(Boolean).join('<br>');return `<div class="poiItem"><div class="poiName">${escapeHtml(x.name)}</div><div class="mini"><b>${x.dist<1000?x.dist+' m':(x.dist/1000).toFixed(1)+' km'} nuo jūsų</b>${x.amenity||x.tourism||x.historic||x.railway||x.public_transport||x.highway?` · ${escapeHtml(x.amenity||x.tourism||x.historic||x.railway||x.public_transport||x.highway)}`:''}</div>${details?`<div class="mini">${details}</div>`:''}<div class="actions"><button class="secondary" data-focus-lat="${x.lat}" data-focus-lon="${x.lon}" data-focus-name="${escapeHtml(x.name)}">Rodyti žemėlapyje</button><button class="ok" data-route-lat="${x.lat}" data-route-lon="${x.lon}" data-route-name="${escapeHtml(x.name)}">Maršrutas</button></div></div>`}).join('')}</div>`}
+function renderAssistantTabs(){const box=$('assistantTabs');if(!box)return;const filters=[['all','Visi'],['taxi','Taksi'],['cafes','Kavinės'],['restaurants','Restoranai'],['hotels','Viešbučiai'],['attractions','Lankytinos'],['transport','Transportas']];box.innerHTML=filters.map(([k,t])=>`<button data-assistant-filter="${k}" class="${k==='all'?'active':''}">${t}</button>`).join('')}
 function drawMyLocation(center){if(!map)return;if(myLocationMarker)myLocationMarker.remove();myLocationMarker=L.circleMarker(center,{radius:10,color:'#fff',weight:3,fillColor:'#2563eb',fillOpacity:1}).addTo(map).bindPopup('<b>Jūs esate čia</b>')}
-function addAssistantMarker(x,key){if(!map)return;const colors={taxi:'#111827',cafes:'#a16207',restaurants:'#ef4444',hotels:'#0ea5e9',attractions:'#8b5cf6',transport:'#10b981'};assistantMarkers.push(L.circleMarker([Number(x.lat),Number(x.lon)],{radius:6,color:'#fff',weight:2,fillColor:colors[key]||'#7c3aed',fillOpacity:1}).addTo(map).bindPopup(`<b>${escapeHtml(x.name)}</b><br>${escapeHtml(x.amenity||key)}`))}
+function addAssistantMarker(x,key){if(!map)return;const colors={taxi:'#111827',cafes:'#a16207',restaurants:'#ef4444',hotels:'#0ea5e9',attractions:'#8b5cf6',transport:'#10b981'};assistantMarkers.push(L.circleMarker([Number(x.lat),Number(x.lon)],{radius:6,color:'#fff',weight:2,fillColor:colors[key]||'#7c3aed',fillOpacity:1}).addTo(map).bindPopup(`<b>${escapeHtml(x.name)}</b><br>${escapeHtml(x.catTitle||key)}`))}
 function clearAssistantMarkers(){assistantMarkers.forEach(m=>m.remove());assistantMarkers=[]}
 function clearRoute(){if(routeLayer){routeLayer.remove();routeLayer=null}}
 async function drawRouteTo(lat,lon,name){if(!assistantCenter){alert('Pirma paspauskite „Kas šalia manęs?“, kad programa žinotų jūsų vietą.');return}const from={lat:assistantCenter[0],lng:assistantCenter[1]};const url=`https://router.project-osrm.org/route/v1/driving/${from.lng},${from.lat};${lon},${lat}?overview=full&geometries=geojson&steps=false`;try{const res=await fetch(url);const data=await res.json();if(!data.routes||!data.routes[0]){alert('Maršruto rasti nepavyko.');return}clearRoute();routeLayer=L.geoJSON(data.routes[0].geometry,{style:{color:'#f97316',weight:5,opacity:.85}}).addTo(map);const km=(data.routes[0].distance/1000).toFixed(1);const min=Math.round(data.routes[0].duration/60);showPage('map',true);map.fitBounds(routeLayer.getBounds().pad(.2));L.popup().setLatLng([Number(lat),Number(lon)]).setContent(`<b>${escapeHtml(name)}</b><br>Maršrutas: ${km} km, apie ${min} min`).openOn(map)}catch(e){alert('Maršruto paslauga neatsakė. Bandykite dar kartą.')}}
@@ -306,12 +80,10 @@ function importData(ev){const f=ev.target.files[0];if(!f)return;const r=new File
 function clearAll(){if(confirm('Ištrinti viską?')){trips=[];saveTrips();renderAll();fitTrips()}}
 function renderAll(){migrateTrips();setupCountries();renderTrips();renderStats();renderSummary();renderTripMarkers()}
 function bindEvents(){document.querySelectorAll('.bottom button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page,false)));$('fitTripsBtn').addEventListener('click',fitTrips);$('country').addEventListener('input',()=>{setupCities();searchCitySuggestions(true)});$('country').addEventListener('change',()=>{setupCities();searchCitySuggestions(true)});$('city').addEventListener('input',()=>{clearTimeout(cityTimer);cityTimer=setTimeout(()=>searchCitySuggestions(false),450)});$('city').addEventListener('focus',()=>searchCitySuggestions(true));$('findCoords').addEventListener('click',findCityCoords);$('saveBtn').addEventListener('click',saveTrip);$('gpsBtn').addEventListener('click',detectLocation);$('assistantSearch').addEventListener('click',searchAssistant);$('assistantLast').addEventListener('click',()=>{const last=trips.length?[...trips].sort((a,b)=>String(b.date).localeCompare(String(a.date)))[0]:null;if(last){$('assistantPlace').value=`${last.city}, ${last.country}`}searchAssistant()});$('exportBtn').addEventListener('click',exportData);$('importBtn').addEventListener('click',()=>$('importFile').click());$('importFile').addEventListener('change',importData);$('clearBtn').addEventListener('click',clearAll);$('closePhoto').addEventListener('click',()=>{$('viewer').style.display='none';$('bigPhoto').src=''});document.addEventListener('click',e=>{const del=e.target.closest('[data-delete]');if(del){if(confirm('Ištrinti?')){trips=trips.filter(t=>String(t.id)!==String(del.dataset.delete));saveTrips();renderAll();fitTrips()}}const img=e.target.closest('[data-photo]');if(img){$('bigPhoto').src=img.dataset.photo;$('viewer').style.display='flex'}const f=e.target.closest('[data-focus-lat]');if(f)focusMap(f.dataset.focusLat,f.dataset.focusLon,f.dataset.focusName);const r=e.target.closest('[data-route-lat]');if(r)drawRouteTo(r.dataset.routeLat,r.dataset.routeLon,r.dataset.routeName);const tab=e.target.closest('[data-assistant-filter]');if(tab){document.querySelectorAll('[data-assistant-filter]').forEach(b=>b.classList.remove('active'));tab.classList.add('active');filterAssistant(tab.dataset.assistantFilter)}})}
-function filterAssistant(key){document.querySelectorAll('.poi').forEach(p=>p.style.display='');if(key==='all')return;const titles={taxi:'Taxi',cafes:'Kavinės',restaurants:'Restoranai',hotels:'Viešbučiai',attractions:'Lankytinos',transport:'Transportas'};document.querySelectorAll('.poi').forEach(p=>{const h=p.querySelector('h3');p.style.display=(h&&h.textContent.includes(titles[key]))?'':'none'})}
+function filterAssistant(key){document.querySelectorAll('.poi').forEach(p=>p.style.display='');if(key==='all')return;const titles={taxi:'Taksi',cafes:'Kavinės',restaurants:'Restoranai',hotels:'Viešbučiai',attractions:'Lankytinos',transport:'Transportas'};document.querySelectorAll('.poi').forEach(p=>{const h=p.querySelector('h3');p.style.display=(h&&h.textContent.includes(titles[key]))?'':'none'})}
 function init(){loadTrips();setupCountries();setupCities();bindEvents();initMap();renderAll();fitTrips()}
 init();
 })();
 </script>
 </body>
 </html>
-
-
