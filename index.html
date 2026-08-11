@@ -59,9 +59,237 @@ function renderTrips(){const box=$('tripList');if(!trips.length){box.innerHTML='
 function renderStats(){$('statTrips').textContent=trips.length;$('statCountries').textContent=new Set(trips.map(t=>t.countryCode||t.country)).size;$('statCities').textContent=new Set(trips.map(t=>`${t.countryCode||t.country}|${t.city}`)).size;const counts={};trips.forEach(t=>counts[t.country]=(counts[t.country]||0)+1);$('countryStats').innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${escapeHtml(k)}: ${v}`).join('<br>')||'—'}
 function renderSummary(){if(!trips.length){$('mapSummary').textContent='Kelionių dar nėra.';$('visitedChips').innerHTML='';return}const last=[...trips].sort((a,b)=>String(b.date).localeCompare(String(a.date)))[0];const countries=[...new Set(trips.map(t=>t.country).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'lt'));$('mapSummary').innerHTML=`Kelionės: <b>${trips.length}</b><br>Aplankytos šalys: <b>${countries.length}</b><br>Paskutinė: ${escapeHtml(last.country)} – ${escapeHtml(last.city)} (${escapeHtml(last.date)})`;$('visitedChips').innerHTML=countries.map(c=>`<span class="chip">${escapeHtml(c)}</span>`).join('')}
 function getMyPosition(){return new Promise((resolve,reject)=>{if(!navigator.geolocation){reject(new Error('GPS nepalaikomas'));return}navigator.geolocation.getCurrentPosition(pos=>resolve([pos.coords.latitude,pos.coords.longitude]),err=>reject(err),{enableHighAccuracy:true,timeout:15000,maximumAge:0})})}
-async function searchAssistant(){let place=$('assistantPlace').value.trim();$('assistantResults').innerHTML='<div class="card">Ieškoma...</div>';clearAssistantMarkers();clearRoute();let center=null,label='';if(place){center=await geocodeFree(place);label=place}else{try{center=await getMyPosition();label='Mano vieta dabar'}catch(e){$('assistantResults').innerHTML='<div class="card">Nepavyko nustatyti buvimo vietos. Leiskite GPS arba įrašykite miestą.</div>';return}}if(!center){$('assistantResults').innerHTML='<div class="card">Vietos rasti nepavyko.</div>';return}assistantCenter=center;drawMyLocation(center);const cats=[['taxi','🚕 Taxi / taksi','amenity','taxi',5000],['cafes','☕ Kavinės','amenity','cafe|ice_cream',5000],['restaurants','🍽️ Restoranai','amenity','restaurant|fast_food|pub|bar',6000],['hotels','🏨 Viešbučiai','tourism','hotel|guest_house|hostel|apartment',8000],['attractions','🏛️ Lankytinos vietos','tourism','attraction|museum|gallery|viewpoint|zoo',8000],['transport','🚆 Transportas','mixed','transport',6000]];let html=`<div class="notice">📍 Rodoma pagal vietą: ${escapeHtml(label)}. Artimiausi rezultatai viršuje.</div>`;let total=0;for(const [key,title,tag,values,radius] of cats){const items=await overpassCategory(center,key,tag,values,radius);total+=items.length;html+=renderPoi(title,items,center,key)}if(total===0){html+=`<div class="warn"><b>Nėra rezultatų iš OpenStreetMap.</b><br>GPS veikia, bet šioje vietoje nerasta OpenStreetMap objektų arba Overpass serveris neatsakė. Įrašyk miestą, pvz. <b>Dublin</b>, <b>Vilnius</b> arba <b>Brussels</b>, ir bandyk dar kartą.</div>`}$('assistantResults').innerHTML=html;renderAssistantTabs();if(map)map.setView(center,14)}
-function overpassQuery(center,key,tag,values,radius){const lat=center[0],lon=center[1];if(key==='transport'){return `[out:json][timeout:25];(node(around:${radius},${lat},${lon})[railway=station];way(around:${radius},${lat},${lon})[railway=station];relation(around:${radius},${lat},${lon})[railway=station];node(around:${radius},${lat},${lon})[public_transport];way(around:${radius},${lat},${lon})[public_transport];node(around:${radius},${lat},${lon})[highway=bus_stop];);out center 60;`}return `[out:json][timeout:25];(node(around:${radius},${lat},${lon})[${tag}~"^(${values})$"];way(around:${radius},${lat},${lon})[${tag}~"^(${values})$"];relation(around:${radius},${lat},${lon})[${tag}~"^(${values})$"];);out center 60;`}
-async function overpassCategory(center,key,tag,values,radius){const endpoints=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter','https://overpass.openstreetmap.ru/api/interpreter'];const q=overpassQuery(center,key,tag,values,radius);for(const ep of endpoints){try{const res=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'data='+encodeURIComponent(q)});if(!res.ok)continue;const data=await res.json();const parsed=parseOverpass(data);if(parsed.length)return parsed}catch(e){}}return []}
+async function searchAssistant(){
+
+  let place=$('assistantPlace').value.trim();
+
+  $('assistantResults').innerHTML='<div class="card">Ieškoma artimiausių vietų...</div>';
+
+  clearAssistantMarkers();
+
+  clearRoute();
+
+
+
+  let center=null,label='';
+
+
+
+  if(place){
+
+    center=await geocodeFree(place);
+
+    label=place;
+
+  }else{
+
+    try{
+
+      center=await getMyPosition();
+
+      label='Mano vieta dabar';
+
+    }catch(e){
+
+      $('assistantResults').innerHTML='<div class="card">Nepavyko nustatyti buvimo vietos. Leiskite GPS arba įrašykite miestą.</div>';
+
+      return;
+
+    }
+
+  }
+
+
+
+  if(!center){
+
+    $('assistantResults').innerHTML='<div class="card">Vietos rasti nepavyko.</div>';
+
+    return;
+
+  }
+
+
+
+  assistantCenter=center;
+
+  drawMyLocation(center);
+
+
+
+  const cats=[
+
+    ['taxi','🚕 Taxi / taksi','[amenity=taxi]',7000],
+
+    ['cafes','☕ Kavinės','[amenity~"^(cafe|ice_cream)$"]',5000],
+
+    ['restaurants','🍽️ Restoranai','[amenity~"^(restaurant|fast_food|pub|bar)$"]',6000],
+
+    ['hotels','🏨 Viešbučiai','[tourism~"^(hotel|guest_house|hostel|apartment|motel)$"]',9000],
+
+    ['attractions','🏛️ Lankytinos vietos','[tourism~"^(attraction|museum|gallery|viewpoint|zoo)$"];nwr(around:RADIUS,LAT,LON)[historic]',9000],
+
+    ['transport','🚆 Transportas','[railway=station];nwr(around:RADIUS,LAT,LON)[public_transport];nwr(around:RADIUS,LAT,LON)[highway=bus_stop]',7000]
+
+  ];
+
+
+
+  let html=`<div class="notice">📍 Rodoma pagal vietą: ${escapeHtml(label)}. Artimiausi rezultatai viršuje.</div>`;
+
+
+
+  const results=await Promise.all(cats.map(async ([key,title,selector,radius])=>{
+
+    const items=await overpassCategory(center,key,selector,radius);
+
+    return {key,title,items};
+
+  }));
+
+
+
+  let total=0;
+
+
+
+  for(const r of results){
+
+    total+=r.items.length;
+
+    html+=renderPoi(r.title,r.items,center,r.key);
+
+  }
+
+
+
+  if(total===0){
+
+    html+=`<div class="warn"><b>Rezultatų nepavyko gauti.</b><br>GPS veikia, bet OpenStreetMap / Overpass šiuo metu negrąžino vietų. Įrašyk miestą, pvz. <b>Dublin</b>, <b>Vilnius</b> arba <b>Brussels</b>, ir bandyk dar kartą.</div>`;
+
+  }
+
+
+
+  $('assistantResults').innerHTML=html;
+
+  renderAssistantTabs();
+
+
+
+  if(map)map.setView(center,14);
+
+}
+
+
+
+function overpassQuery(center,key,selector,radius){
+
+  const lat=center[0],lon=center[1];
+
+
+
+  if(selector.includes('LAT')){
+
+    return `[out:json][timeout:18];(nwr(around:${radius},${lat},${lon})${selector.replaceAll('RADIUS',radius).replaceAll('LAT',lat).replaceAll('LON',lon)};);out center 50;`;
+
+  }
+
+
+
+  return `[out:json][timeout:18];(nwr(around:${radius},${lat},${lon})${selector};);out center 50;`;
+
+}
+
+
+
+function fetchWithTimeout(url,options={},ms=10000){
+
+  const controller=new AbortController();
+
+  const id=setTimeout(()=>controller.abort(),ms);
+
+  return fetch(url,{...options,signal:controller.signal}).finally(()=>clearTimeout(id));
+
+}
+
+
+
+async function overpassCategory(center,key,selector,radius){
+
+  const endpoints=[
+
+    'https://overpass-api.de/api/interpreter',
+
+    'https://overpass.kumi.systems/api/interpreter'
+
+  ];
+
+
+
+  const q=overpassQuery(center,key,selector,radius);
+
+
+
+  for(const ep of endpoints){
+
+    try{
+
+      const res=await fetchWithTimeout(ep,{
+
+        method:'POST',
+
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+
+        body:'data='+encodeURIComponent(q)
+
+      },10000);
+
+
+
+      if(!res.ok)continue;
+
+
+
+      const data=await res.json();
+
+      const parsed=parseOverpass(data);
+
+
+
+      if(parsed.length)return parsed;
+
+    }catch(e){}
+
+
+
+    try{
+
+      const res=await fetchWithTimeout(ep+'?data='+encodeURIComponent(q),{},10000);
+
+
+
+      if(!res.ok)continue;
+
+
+
+      const data=await res.json();
+
+      const parsed=parseOverpass(data);
+
+
+
+      if(parsed.length)return parsed;
+
+    }catch(e){}
+
+  }
+
+
+
+  return [];
+
+}
 function parseOverpass(data){const seen=new Set();return(data.elements||[]).map(el=>{const tags=el.tags||{};const lat=el.lat||(el.center&&el.center.lat);const lon=el.lon||(el.center&&el.center.lon);const street=[tags['addr:street'],tags['addr:housenumber']].filter(Boolean).join(' ');const city=tags['addr:city']||'';return{name:tags.name||tags.brand||'(be pavadinimo)',lat,lon,address:[street,city].filter(Boolean).join(', '),opening:tags.opening_hours||'',phone:tags.phone||tags['contact:phone']||'',website:tags.website||tags['contact:website']||'',amenity:tags.amenity||tags.tourism||tags.historic||tags.railway||tags.public_transport||tags.highway||''}}).filter(x=>{const ok=x.name&&Number.isFinite(Number(x.lat))&&Number.isFinite(Number(x.lon));const id=x.name+'|'+x.lat+'|'+x.lon;if(!ok||seen.has(id))return false;seen.add(id);return true})}
 function renderPoi(title,items,center,key){if(!items.length)return `<div class="poi"><h3>${title}</h3><p class="small">Rezultatų nerasta.</p></div>`;const sorted=items.map(x=>({...x,dist:Math.round(distance(center[0],center[1],Number(x.lat),Number(x.lon)))})).sort((a,b)=>a.dist-b.dist).slice(0,8);return `<div class="poi"><h3>${title}</h3>${sorted.map(x=>{addAssistantMarker(x,key||title);const details=[x.address?`📍 ${escapeHtml(x.address)}`:'',x.opening?`🕒 ${escapeHtml(x.opening)}`:'',x.phone?`☎️ ${escapeHtml(x.phone)}`:'',x.website?`🌐 ${escapeHtml(x.website)}`:''].filter(Boolean).join('<br>');return `<div class="poiItem"><div class="poiName">${escapeHtml(x.name)}</div><div class="mini"><b>${x.dist<1000?x.dist+' m':(x.dist/1000).toFixed(1)+' km'} nuo jūsų</b>${x.amenity?` · ${escapeHtml(x.amenity)}`:''}</div>${details?`<div class="mini">${details}</div>`:''}<div class="actions"><button class="secondary" data-focus-lat="${x.lat}" data-focus-lon="${x.lon}" data-focus-name="${escapeHtml(x.name)}">Rodyti žemėlapyje</button><button class="ok" data-route-lat="${x.lat}" data-route-lon="${x.lon}" data-route-name="${escapeHtml(x.name)}">Maršrutas</button></div></div>`}).join('')}</div>`}
 function renderAssistantTabs(){const box=$('assistantTabs');if(!box)return;const filters=[['all','Visi'],['taxi','Taxi'],['cafes','Kavinės'],['restaurants','Restoranai'],['hotels','Viešbučiai'],['attractions','Lankytinos'],['transport','Transportas']];box.innerHTML=filters.map(([k,t])=>`<button data-assistant-filter="${k}" class="${k==='all'?'active':''}">${t}</button>`).join('')}
