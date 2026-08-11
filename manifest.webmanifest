@@ -1,6 +1,6 @@
 {
-  "name": "Travel Atlas Pro",
-  "short_name": "Travel Atlas",
+  "name": "Travoria",
+  "short_name": "Travoria",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#fff7ed",
